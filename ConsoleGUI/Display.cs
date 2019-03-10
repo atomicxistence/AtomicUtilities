@@ -45,8 +45,8 @@ namespace ConsoleGUI
 		{
 			this.currentMainMenu = currentMainMenu;
 
-			SetInitialWindowSize();
 			minHeight = ds.MinMenuHeight + ds.PromptOffset + ds.Title.Length;
+			SetInitialWindowSize();
 			mainMenuTopEdge = centeredWindowTopEdge + ds.Title.Length + ds.PromptOffset;
 
 			Console.CursorVisible = false;
@@ -126,29 +126,29 @@ namespace ConsoleGUI
 
 		public void UserInputPrompt(string promptMessage)
 		{
-			var userInputPromptWidth = minMenuWidth / 2 + minMenuWidth / 4;
+			var userInputPromptWidth = ds.MinMenuWidth / 2 + ds.MinMenuWidth / 4;
 			var userInputPromptHeight = 3;
 			var userInputPromptLeftEdge = (Console.WindowWidth / 2) - (userInputPromptWidth / 2);
 			var userInputPromptTopEdge = (Console.WindowHeight / 2) - (userInputPromptHeight / 2);
 
 			//Print user prompt background
-			Console.BackgroundColor = colorSubMenuBG;
-			Console.ForegroundColor = colorSubMenuFG;
+			Console.BackgroundColor = ct.ColorSubMenuBG;
+			Console.ForegroundColor = ct.ColorSubMenuFG;
 			for (int i = 0; i < userInputPromptHeight; i++)
 			{
 				Console.SetCursorPosition(userInputPromptLeftEdge, userInputPromptTopEdge + i);
 				PrintBackgroundFill(userInputPromptWidth);
 			}
 			//Print user input prompt message
-			Console.SetCursorPosition(userInputPromptLeftEdge + subMenuLeftOffset, 
+			Console.SetCursorPosition(userInputPromptLeftEdge + ds.SubMenuLeftOffset, 
 									  userInputPromptTopEdge + (userInputPromptHeight / 2));
 			Console.Write(promptMessage);
 
 			// Print user input field background
-			Console.ForegroundColor = colorTextEntryFG;
-			Console.BackgroundColor = colorTextEntryBG;
-			PrintBackgroundFill(userInputPromptWidth - promptMessage.Length - (subMenuLeftOffset * 2));
-			Console.SetCursorPosition(userInputPromptLeftEdge + subMenuLeftOffset + promptMessage.Length + 1,
+			Console.ForegroundColor = ct.ColorTextEntryFG;
+			Console.BackgroundColor = ct.ColorTextEntryBG;
+			PrintBackgroundFill(userInputPromptWidth - promptMessage.Length - (ds.SubMenuLeftOffset * 2));
+			Console.SetCursorPosition(userInputPromptLeftEdge + ds.SubMenuLeftOffset + promptMessage.Length + 1,
 									  userInputPromptTopEdge + (userInputPromptHeight / 2));
 		}
 
