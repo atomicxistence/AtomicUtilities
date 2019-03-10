@@ -33,19 +33,20 @@ namespace Atomic.ConsoleGUI
 		{
 			ds = displaySettings;
 			ct = new DefaultColorTheme();
+
+			Initialize();
 		}
 
 		public Display(IDisplaySettings displaySettings, IColorTheme colorTheme)
 		{
 			ds = displaySettings;
 			ct = colorTheme;
+
+			Initialize();
 		}
 
-		//TODO: remove the IMenu parameter and call initialize from the constructor
-		public void Initialize(IMenu currentMainMenu)
+		private void Initialize()
 		{
-			this.currentMainMenu = currentMainMenu;
-
 			minHeight = ds.MinMenuHeight + ds.PromptOffset + ds.Title.Length;
 			SetInitialWindowSize();
 			mainMenuTopEdge = centeredWindowTopEdge + ds.Title.Length + ds.PromptOffset;
