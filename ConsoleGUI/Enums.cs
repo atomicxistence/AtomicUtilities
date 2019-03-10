@@ -1,19 +1,18 @@
 ﻿namespace ConsoleGUI
 {
-	public enum MenuType
+	public enum SubMenuType
 	{
-		TaskMenu,
-		YesNoMenu,
+		ItemSubMenu,
+		VerificationSubMenu,
 	}
 
 	public enum InputType
 	{
 		NextItem,
 		PreviousItem,
-		NextPage,
-		PreviousPage,
+		NextMenu,
+		PreviousMenu,
 		Select,
-		NewTask,
 		Quit,
 		Back,
 		Invalid,
@@ -21,9 +20,9 @@
 
 	public enum SelectionType
 	{
-		TaskPageSelection,
-		TaskActionSelection,
-		YesNoSubSelection,
+		MainMenuSelection,
+		SubMenuSelection,
+		VerificationSelection,
 	}
 
 	public enum OptionType

@@ -4,7 +4,7 @@
 	{
 		public string Title { get; private set; }
 		public OptionType Action { get; private set; }
-
+		
 		public Option(string title, OptionType action)
 		{
 			Title = title;
