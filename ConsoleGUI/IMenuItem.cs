@@ -1,8 +1,17 @@
 ﻿namespace ConsoleGUI
 {
-    public interface IMenuItem
+	/// <summary>
+	/// Defines an item that is held within a menu list
+	/// </summary>
+	public interface IMenuItem
     {
-        string Title { get; }
+		/// <summary>
+		/// The title of the menu item
+		/// </summary>
+		string Title { get; }
+		/// <summary>
+		/// The status of the menu item
+		/// </summary>
         bool IsActive { get; set; }
     }
 }
