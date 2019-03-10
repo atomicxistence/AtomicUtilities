@@ -1,4 +1,4 @@
-﻿namespace ConsoleGUI
+﻿namespace Atomic.ConsoleGUI
 {
 	public struct Selection
 	{

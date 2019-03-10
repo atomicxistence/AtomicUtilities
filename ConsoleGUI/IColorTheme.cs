@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleGUI
+namespace Atomic.ConsoleGUI
 {
 	/// <summary>
 	/// Defines the set of color values used in ConsoleGUI.Display

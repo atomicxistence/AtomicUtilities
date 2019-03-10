@@ -1,4 +1,4 @@
-﻿namespace ConsoleGUI
+﻿namespace Atomic.ConsoleGUI
 {
 	/// <summary>
 	/// Defines an item that is held within a menu list

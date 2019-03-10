@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ConsoleGUI
+namespace Atomic.ConsoleGUI
 {
 	/// <summary>
 	/// Defines a menu list of menu items

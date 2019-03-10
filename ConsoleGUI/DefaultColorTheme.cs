@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleGUI
+namespace Atomic.ConsoleGUI
 {
 	class DefaultColorTheme : IColorTheme
 	{

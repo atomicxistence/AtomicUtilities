@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Atomic.ConsoleGUI</RootNamespace>
+    <Authors>Jeff Adams</Authors>
+    <Company>atomicxistence</Company>
+    <Product>Atomic.ConsoleGUI</Product>
+    <Description>A GUI menu system for the console</Description>
+    <PackageProjectUrl>https://github.com/atomicxistence/ConsoleGUI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/atomicxistence/ConsoleGUI</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleGUI
+namespace Atomic.ConsoleGUI
 {
 	public class Display
 	{
@@ -41,6 +41,7 @@ namespace ConsoleGUI
 			ct = colorTheme;
 		}
 
+		//TODO: remove the IMenu parameter and call initialize from the constructor
 		public void Initialize(IMenu currentMainMenu)
 		{
 			this.currentMainMenu = currentMainMenu;
@@ -59,7 +60,7 @@ namespace ConsoleGUI
 			CompleteRefresh();
 		}
 
-		public void Refresh(IMenu currentMainMenu, Selection nextMainMenuSelection, bool forceRefresh)
+		public void Refresh(IMenu currentMainMenu, Selection nextMainMenuSelection, bool forceMainMenuRefresh)
 		{
 			mainMenuHasChanged = this.currentMainMenu != currentMainMenu;
 			this.currentMainMenu = currentMainMenu;
@@ -85,13 +86,14 @@ namespace ConsoleGUI
 				previousMainMenuSelection = new Selection(nextMainMenuSelection.ItemIndex, nextMainMenuSelection.MenuIndex);
 			}
 
-			if (forceRefresh)
+			if (forceMainMenuRefresh)
 			{
 				PrintMainMenuItems();
 				PrintMainMenuSelections();
 			}
 		}
 
+		//TODO: make sub menu complete refresh private and call from sub menu refresh IF nessessary
 		public void SubMenuCompleteRefresh(IMenu subMenu, Selection nextSubMenuSelection, string subMenuPrompt)
 		{
 			this.nextSubMenuSelection = nextSubMenuSelection;

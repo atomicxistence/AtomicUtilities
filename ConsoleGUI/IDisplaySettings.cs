@@ -1,4 +1,4 @@
-﻿namespace ConsoleGUI
+﻿namespace Atomic.ConsoleGUI
 {
 	/// <summary>
 	/// Defines the settings needed to initialize a main menu
