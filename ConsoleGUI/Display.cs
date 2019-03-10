@@ -209,8 +209,8 @@ namespace ConsoleGUI
 
 		private void PrintSubMenuNextSelection(IMenu subMenu, int subMenuLeftStart, int subMenuTopStart)
 		{
-			Console.ForegroundColor = ct.ColorTaskSelectedFG;
-			Console.BackgroundColor = ct.ColorTaskSelectedBG;
+			Console.ForegroundColor = ct.ColorItemSelectedFG;
+			Console.BackgroundColor = ct.ColorItemSelectedBG;
 
 			Console.SetCursorPosition(subMenuLeftStart + ds.SubMenuLeftOffset,
 									  subMenuTopStart + ds.SubMenuTopOffset + nextSubMenuSelection.ItemIndex + ds.SubMenuPromptOffset);
@@ -309,8 +309,8 @@ namespace ConsoleGUI
 
 		private void PrintNextSelection(IMenuItem nextMenuItem)
 		{
-			Console.ForegroundColor = ct.ColorTaskSelectedFG;
-			Console.BackgroundColor = ct.ColorTaskSelectedBG;
+			Console.ForegroundColor = ct.ColorItemSelectedFG;
+			Console.BackgroundColor = ct.ColorItemSelectedBG;
 			Console.SetCursorPosition(centeredWindowLeftEdge,
 									  centeredWindowTopEdge + mainMenuTopEdge + nextMainMenuSelection.ItemIndex);
 			Console.Write(ds.SelectionIndicator);

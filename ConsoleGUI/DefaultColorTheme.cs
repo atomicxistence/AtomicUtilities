@@ -10,9 +10,8 @@ namespace ConsoleGUI
 		public ConsoleColor ColorTitleFG => ConsoleColor.Cyan;
 		public ConsoleColor ColorPromptFG => ConsoleColor.Cyan;
 		public ConsoleColor ColorPromptBG => ConsoleColor.DarkGray;
-		public ConsoleColor ColorTaskActioned => ConsoleColor.DarkGray;
-		public ConsoleColor ColorTaskSelectedBG => ConsoleColor.White;
-		public ConsoleColor ColorTaskSelectedFG => ConsoleColor.DarkYellow;
+		public ConsoleColor ColorItemSelectedBG => ConsoleColor.White;
+		public ConsoleColor ColorItemSelectedFG => ConsoleColor.DarkYellow;
 		public ConsoleColor ColorTextEntryBG => ConsoleColor.White;
 		public ConsoleColor ColorTextEntryFG => ConsoleColor.Black;
 		public ConsoleColor ColorDefaultFG => ConsoleColor.Black;

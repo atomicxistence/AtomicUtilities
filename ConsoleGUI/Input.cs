@@ -4,6 +4,11 @@ namespace ConsoleGUI
 {
 	public static class Input
 	{
+		/// <summary>
+		/// Used to get the key pressed from the user and return the desired action
+		/// </summary>
+		/// <param name="selectionType">Give the type of menu selection being used</param>
+		/// <returns>A type of input based on the key pressed</returns>
 		public static InputType Selection(SelectionType selectionType)
 		{
 			var input = Console.ReadKey(true);
