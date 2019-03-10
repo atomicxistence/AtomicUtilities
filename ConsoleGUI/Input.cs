@@ -11,7 +11,7 @@ namespace ConsoleGUI
 			switch (selectionType)
 			{
 				case SelectionType.MainMenuSelection:
-					return TaskSelect(input.Key);
+					return ItemSelect(input.Key);
 				case SelectionType.SubMenuSelection:
 					return ActionSelect(input.Key);
 				case SelectionType.VerificationSelection:
@@ -21,14 +21,12 @@ namespace ConsoleGUI
 			}
 		}
 
-		private InputType TaskSelect(ConsoleKey input)
+		private InputType ItemSelect(ConsoleKey input)
 		{
 			switch (input)
 			{
 				case ConsoleKey.Enter:
 					return InputType.Select;
-				case ConsoleKey.N:
-					return InputType.NewTask;
 				case ConsoleKey.UpArrow:
 					return InputType.PreviousItem;
 				case ConsoleKey.DownArrow:

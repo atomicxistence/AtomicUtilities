@@ -24,13 +24,4 @@
 		SubMenuSelection,
 		VerificationSelection,
 	}
-
-	public enum OptionType
-	{
-		Yes,
-		No,
-		ActionTask,
-		CompleteTask,
-		Back,
-	}
 }
