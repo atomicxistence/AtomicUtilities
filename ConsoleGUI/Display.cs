@@ -159,7 +159,7 @@ namespace ConsoleGUI
 			var messageBoxLeftEdge = (Console.WindowWidth / 2) - (messageBoxWidth / 2);
 			var messageBoxTopEdge = (Console.WindowHeight / 2) - (messageBoxHeight / 2);
 
-			//Print user prompt background
+			//Print message box background
 			Console.BackgroundColor = ct.ColorSubMenuBG;
 			Console.ForegroundColor = ct.ColorSubMenuFG;
 			for (int i = 0; i < messageBoxHeight; i++)
@@ -167,10 +167,10 @@ namespace ConsoleGUI
 				Console.SetCursorPosition(messageBoxLeftEdge, messageBoxTopEdge + i);
 				PrintBackgroundFill(messageBoxWidth);
 			}
-			//Print user input prompt message
+			//Print message box message
 			Console.SetCursorPosition(messageBoxLeftEdge + ds.SubMenuLeftOffset,
 									  messageBoxTopEdge + (messageBoxHeight / 2));
-			Console.Write(promptMessage);
+			Console.Write(message);
 		}
 
 		//-----------------------------------------------------------------------------------------
