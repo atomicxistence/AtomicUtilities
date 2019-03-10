@@ -3,6 +3,6 @@
     public interface IMenuItem
     {
         string Title { get; }
-        void Interact();
+        bool IsActive { get; set; }
     }
 }

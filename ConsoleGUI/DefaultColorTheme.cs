@@ -12,6 +12,7 @@ namespace ConsoleGUI
 		public ConsoleColor ColorPromptBG => ConsoleColor.DarkGray;
 		public ConsoleColor ColorItemSelectedBG => ConsoleColor.White;
 		public ConsoleColor ColorItemSelectedFG => ConsoleColor.DarkYellow;
+		public ConsoleColor ColorItemInactiveFG => ConsoleColor.DarkGray;
 		public ConsoleColor ColorTextEntryBG => ConsoleColor.White;
 		public ConsoleColor ColorTextEntryFG => ConsoleColor.Black;
 		public ConsoleColor ColorDefaultFG => ConsoleColor.Black;

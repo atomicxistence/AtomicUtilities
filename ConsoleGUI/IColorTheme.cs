@@ -40,6 +40,10 @@ namespace ConsoleGUI
 		/// </summary>
 		ConsoleColor ColorItemSelectedFG { get; }
 		/// <summary>
+		/// The color used for an inactive menu item's text
+		/// </summary>
+		ConsoleColor ColorItemInactiveFG { get; }
+		/// <summary>
 		/// The color used for the user text entry background
 		/// </summary>
 		ConsoleColor ColorTextEntryBG { get; }
