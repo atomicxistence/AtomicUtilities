@@ -2,9 +2,9 @@
 
 namespace ConsoleGUI
 {
-	public class Input
+	public static class Input
 	{
-		public InputType Selection(SelectionType selectionType)
+		public static InputType Selection(SelectionType selectionType)
 		{
 			var input = Console.ReadKey(true);
 
@@ -21,7 +21,7 @@ namespace ConsoleGUI
 			}
 		}
 
-		private InputType ItemSelect(ConsoleKey input)
+		private static InputType ItemSelect(ConsoleKey input)
 		{
 			switch (input)
 			{
@@ -42,7 +42,7 @@ namespace ConsoleGUI
 			}
 		}
 
-		private InputType ActionSelect(ConsoleKey input)
+		private static InputType ActionSelect(ConsoleKey input)
 		{
 			switch (input)
 			{
@@ -59,7 +59,7 @@ namespace ConsoleGUI
 			}
 		}
 
-		private InputType VerificationSelect(ConsoleKey input)
+		private static InputType VerificationSelect(ConsoleKey input)
 		{
 			switch (input)
 			{
