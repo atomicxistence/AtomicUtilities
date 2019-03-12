@@ -45,21 +45,6 @@ namespace Atomic.ConsoleGUI
 			Initialize();
 		}
 
-		private void Initialize()
-		{
-			minHeight = ds.MinMenuHeight + ds.PromptOffset + ds.Title.Length;
-			SetInitialWindowSize();
-			mainMenuTopEdge = centeredWindowTopEdge + ds.Title.Length + ds.PromptOffset;
-
-			Console.CursorVisible = false;
-
-			previousMainMenuSelection = Selection.firstItem;
-			nextMainMenuSelection = Selection.firstItem;
-			currentSubMenuSelection = Selection.firstItem;
-			nextSubMenuSelection = Selection.firstItem;
-
-			CompleteRefresh();
-		}
 
 		public void Refresh(IMenu currentMainMenu, Selection nextMainMenuSelection, bool forceMainMenuRefresh)
 		{
@@ -71,7 +56,7 @@ namespace Atomic.ConsoleGUI
 
 			if (WindowSizeHasChanged())
 			{
-				CompleteRefresh();
+				MainMenuCompleteRefresh();
 			}
 
 			if (previousMainMenuSelection.MenuIndex != nextMainMenuSelection.MenuIndex)
@@ -94,23 +79,6 @@ namespace Atomic.ConsoleGUI
 			}
 		}
 
-		//TODO: make sub menu complete refresh private and call from sub menu refresh IF nessessary
-		public void SubMenuCompleteRefresh(IMenu subMenu, Selection nextSubMenuSelection, string subMenuPrompt)
-		{
-			this.nextSubMenuSelection = nextSubMenuSelection;
-			currentSubMenuSelection = nextSubMenuSelection;
-
-			this.subMenuPrompt = subMenuPrompt;
-
-			var subMenuHorizontalSize = ds.MinMenuHeight / 2;
-			var subMenuLeftStart = (Console.WindowWidth / 2)  - (subMenuHorizontalSize / 2);
-			var subMenuTopStart = (Console.WindowHeight / 2) - (subMenu.MenuItems.Count / 2) + (ds.SubMenuTopOffset * 2);
-
-			PrintSubMenuField(subMenu, subMenuLeftStart, subMenuTopStart);
-			PrintSubMenuOptions(subMenu, subMenuLeftStart, subMenuTopStart);
-			PrintSubMenuSelections(subMenu);
-		}
-
 		public void SubMenuRefresh(IMenu subMenu, Selection nextSubMenuSelection)
 		{
 			this.nextSubMenuSelection = nextSubMenuSelection;
@@ -127,7 +95,14 @@ namespace Atomic.ConsoleGUI
 			}
 		}
 
-		public void UserInputPrompt(string promptMessage)
+		public void CreateSubMenu(IMenu subMenu, Selection nextSubMenuSelection, string subMenuPrompt)
+		{
+			this.subMenuPrompt = subMenuPrompt;
+
+			SubMenuCompleteRefresh(subMenu, nextSubMenuSelection);
+		}
+
+		public void CreateUserInputPrompt(string promptMessage)
 		{
 			var userInputPromptWidth = ds.MinMenuWidth / 2 + ds.MinMenuWidth / 4;
 			var userInputPromptHeight = 3;
@@ -155,7 +130,7 @@ namespace Atomic.ConsoleGUI
 									  userInputPromptTopEdge + (userInputPromptHeight / 2));
 		}
 
-		public void MessageBox(string message)
+		public void CreateMessageBox(string message)
 		{
 			var messageBoxWidth = ds.MinMenuWidth / 2 + ds.MinMenuWidth / 4;
 			var messageBoxHeight = 3;
@@ -177,6 +152,86 @@ namespace Atomic.ConsoleGUI
 		}
 
 		//-----------------------------------------------------------------------------------------
+		private void Initialize()
+		{
+			minHeight = ds.MinMenuHeight + ds.PromptOffset + ds.Title.Length;
+			SetInitialWindowSize();
+			mainMenuTopEdge = centeredWindowTopEdge + ds.Title.Length + ds.PromptOffset;
+
+			Console.CursorVisible = false;
+
+			previousMainMenuSelection = Selection.firstItem;
+			nextMainMenuSelection = Selection.firstItem;
+			currentSubMenuSelection = Selection.firstItem;
+			nextSubMenuSelection = Selection.firstItem;
+
+			MainMenuCompleteRefresh();
+		}
+
+		private void SetInitialWindowSize()
+		{
+			Console.SetWindowSize(ds.MinMenuWidth, minHeight);
+			currentWindowWidth = Console.WindowWidth;
+			currentWindowHeight = Console.WindowHeight;
+
+			SetCenteredWindowEdges();
+		}
+
+		private void SetCenteredWindowEdges()
+		{
+			centeredWindowLeftEdge = (currentWindowWidth / 2) - (ds.MinMenuWidth / 2);
+			centeredWindowTopEdge = (currentWindowHeight / 2) - (minHeight / 2);
+		}
+
+		private bool WindowSizeHasChanged()
+		{
+			bool hasChanged = false;
+
+			while (Console.WindowWidth < ds.MinMenuWidth || Console.WindowHeight < minHeight)
+			{
+				hasChanged = true;
+				Console.Clear();
+				Console.WriteLine($"Please adjust your window size to at least {ds.MinMenuWidth} by {minHeight}. Press any key to continue.");
+				Console.ReadKey();
+			}
+
+			if (Console.WindowWidth != currentWindowWidth || Console.WindowHeight != currentWindowHeight)
+			{
+				hasChanged = true;
+				currentWindowWidth = Console.WindowWidth;
+				currentWindowHeight = Console.WindowHeight;
+			}
+
+			needSubMenuRefresh = hasChanged;
+
+			return hasChanged;
+		}
+
+		private void MainMenuCompleteRefresh()
+		{
+			Console.ResetColor();
+			Console.Clear();
+			Console.CursorVisible = false;
+			SetCenteredWindowEdges();
+			PrintTitle();
+			PrintMainMenuPrompt();
+			PrintMainMenuItems();
+			PrintMainMenuSelections();
+		}
+
+		private void SubMenuCompleteRefresh(IMenu subMenu, Selection nextSubMenuSelection)
+		{
+			this.nextSubMenuSelection = nextSubMenuSelection;
+			currentSubMenuSelection = nextSubMenuSelection;
+
+			var subMenuHorizontalSize = ds.MinMenuHeight / 2;
+			var subMenuLeftStart = (Console.WindowWidth / 2)  - (subMenuHorizontalSize / 2);
+			var subMenuTopStart = (Console.WindowHeight / 2) - (subMenu.MenuItems.Count / 2) + (ds.SubMenuTopOffset * 2);
+
+			PrintSubMenuField(subMenu, subMenuLeftStart, subMenuTopStart);
+			PrintSubMenuOptions(subMenu, subMenuLeftStart, subMenuTopStart);
+			PrintSubMenuSelections(subMenu);
+		}
 
 		private void PrintSubMenuField(IMenu subMenu, int subMenuLeftStart, int subMenuTopStart)
 		{
@@ -247,57 +302,6 @@ namespace Atomic.ConsoleGUI
 			PrintBackgroundFill((ds.MinMenuWidth / 2) - (ds.SubMenuLeftOffset * 2) -
 								(subMenu.MenuItems[nextSubMenuSelection.ItemIndex].Title.Length +
 								 ds.SelectionIndicator.Length));
-		}
-
-		private void SetInitialWindowSize()
-		{
-			Console.SetWindowSize(ds.MinMenuWidth, minHeight);
-			currentWindowWidth = Console.WindowWidth;
-			currentWindowHeight = Console.WindowHeight;
-
-			SetCenteredWindowEdges();
-		}
-
-		private void SetCenteredWindowEdges()
-		{
-			centeredWindowLeftEdge = (currentWindowWidth / 2) - (ds.MinMenuWidth / 2);
-			centeredWindowTopEdge = (currentWindowHeight / 2) - (minHeight / 2);
-		}
-
-		private bool WindowSizeHasChanged()
-		{
-			bool hasChanged = false;
-
-			while (Console.WindowWidth < ds.MinMenuWidth || Console.WindowHeight < minHeight)
-			{
-				hasChanged = true;
-				Console.Clear();
-				Console.WriteLine($"Please adjust your window size to at least {ds.MinMenuWidth} by {minHeight}. Press any key to continue.");
-				Console.ReadKey();
-			}
-
-			if (Console.WindowWidth != currentWindowWidth || Console.WindowHeight != currentWindowHeight)
-			{
-				hasChanged = true;
-				currentWindowWidth = Console.WindowWidth;
-				currentWindowHeight = Console.WindowHeight;
-			}
-
-			needSubMenuRefresh = hasChanged;
-
-			return hasChanged;
-		}
-
-		private void CompleteRefresh()
-		{
-			Console.ResetColor();
-			Console.Clear();
-			Console.CursorVisible = false;
-			SetCenteredWindowEdges();
-			PrintTitle();
-			PrintMainMenuPrompt();
-			PrintMainMenuItems();
-			PrintMainMenuSelections();
 		}
 
 		private void PrintMainMenuSelections()
